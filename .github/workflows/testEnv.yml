@@ -1,0 +1,17 @@
+name: Deploy to UAT
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: windows-latest
+    environment: uat
+    steps:
+      - name: Use environment variables in PowerShell
+        run: |
+          Write-Output "UAT Variable is $env:MY_UAT_VAR"
+        shell: pwsh
+        env:
+          MY_UAT_VAR: ${{ vars.TEST }}
